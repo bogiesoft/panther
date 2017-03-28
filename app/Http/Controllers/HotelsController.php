@@ -22,7 +22,15 @@ class HotelsController extends ApiController
      */
     public function index()
     {
-        $hotels = Hotel::simplePaginate(5);
+        
+        $hotels = $this->getAuthenticatedUser()->hotels;
+
+        return $this->respond($this->hotelTransformer->transformCollection($hotels->all()));
+    }
+
+    public function search($query)
+    {
+        $hotels = Hotel::search($query)->paginate(10);
 
         return $this->respond($this->hotelTransformer->transformPaginatedCollection($hotels));
     }

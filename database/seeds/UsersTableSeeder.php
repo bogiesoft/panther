@@ -13,6 +13,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        $num_users = 35;
+
         $faker = Faker\Factory::create();
 
         User::create([
@@ -22,11 +24,13 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make('philip1234')
         ]);
 
-        User::create([
-            'first_name' => $faker->firstName(),
-            'last_name' => $faker->lastName(),
-            'email' => $faker->email(),
-            'password' => Hash::make('philip1234')
-        ]);
+        for ($i=0; $i < $num_users; $i++) { 
+            User::create([
+                'first_name' => $faker->firstName(),
+                'last_name' => $faker->lastName(),
+                'email' => $faker->email(),
+                'password' => Hash::make('philip1234')
+            ]);
+        }
     }
 }

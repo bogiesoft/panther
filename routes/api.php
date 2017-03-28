@@ -17,9 +17,9 @@ Route::get('/', function () {
     return view('index');
 });
 
-Route::group(['prefix' => 'v1', 'middleware' => ['jwt.auth','hasHotel']], function()
+Route::group(['prefix' => 'v1', 'middleware' => ['jwt.auth']], function()
 {
- 
+    Route::resource('hotels', 'HotelsController');
 });
 
 Route::group(['prefix' => 'v1'], function()
@@ -31,7 +31,8 @@ Route::group(['prefix' => 'v1'], function()
     Route::post('location/search', 'LocationSearchController@search');
     Route::post('location/autocomplete', 'LocationSearchController@autocomplete');
 
-    Route::resource('hotels', 'HotelsController');
+    Route::get('hotels/search/{query}', 'HotelsController@search');
+
     Route::resource('rooms', 'RoomsController');
     Route::resource('guests', 'GuestsController');
     Route::resource('stays', 'StaysController');
