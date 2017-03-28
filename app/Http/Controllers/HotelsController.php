@@ -22,13 +22,9 @@ class HotelsController extends ApiController
      */
     public function index()
     {
-        $hotels = Request::user()
-            ->hotels
-            ->all();
+        $hotels = Hotel::simplePaginate(5);
 
-        return $this->respond([
-            'hotels' => $this->hotelTransformer->transformCollection($hotels)
-        ]);
+        return $this->respond($this->hotelTransformer->transformPaginatedCollection($hotels));
     }
 
     /**
@@ -62,10 +58,7 @@ class HotelsController extends ApiController
 
         $hotel = Hotel::create(Input::all());
 
-        return $this->respondWithCreated([
-            'data' => $this->hotelTransformer->transform($hotel)],
-            'Hotel created successfully'
-        );
+        return $this->respondWithCreated($this->hotelTransformer->transform($hotel));
     }
 
     /**
@@ -86,9 +79,7 @@ class HotelsController extends ApiController
             return $this->respondNotFound();
         }
 
-        return $this->respond([
-            'hotel' => $this->hotelTransformer->transform($hotel)
-        ]);
+        return $this->respond($this->hotelTransformer->transform($hotel));
     }
 
     /**
@@ -123,10 +114,7 @@ class HotelsController extends ApiController
 
         $hotel->update(Input::all());
 
-        return $this->respondWithCreated([
-            'data' => $this->hotelTransformer->transform($hotel)],
-            "Hotel updated successfully"
-        );
+        return $this->respondWithCreated($this->hotelTransformer->transform($hotel));
     }
 
     /**

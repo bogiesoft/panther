@@ -28,6 +28,9 @@ Route::group(['prefix' => 'v1'], function()
     Route::post('authenticate', 'AuthenticateController@authenticate');
     Route::post('register', 'AuthenticateController@register');
 
+    Route::post('location/search', 'LocationSearchController@search');
+    Route::post('location/autocomplete', 'LocationSearchController@autocomplete');
+
     Route::resource('hotels', 'HotelsController');
     Route::resource('rooms', 'RoomsController');
     Route::resource('guests', 'GuestsController');

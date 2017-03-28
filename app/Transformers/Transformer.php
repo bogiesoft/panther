@@ -15,5 +15,17 @@ abstract class Transformer
         return array_map([$this, 'transform'], $items);
     }
 
+    public function transformPaginatedCollection($items)
+    {
+        $collection = $this->transformCollection($items->items());
+
+        $response['data'] = $collection;
+        $response['per_page'] = $items->perPage();
+        $response['current_page'] = $items->currentPage();
+        $response['next_page_url'] = $items->nextPageUrl();
+
+        return $response;
+    }
+
     public abstract function transform($item);
 }
