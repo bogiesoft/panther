@@ -19,7 +19,7 @@ class ProductsTableSeeder extends Seeder
 
         foreach ($hotelIds as $hotelId)
         {
-            $numProducts = $faker->numberBetween(15, 40);
+            $numProducts = $faker->numberBetween(3, 10);
 
             for ($i = 0; $i < $numProducts; $i++) {
                 Product::create([

@@ -15,11 +15,12 @@ class HotelsTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
+
         $user_ids = User::pluck('id')->all();
 
         foreach ($user_ids as $user_id)
         {
-            $num_hotels = $faker->numberBetween(2,3);
+            $num_hotels = $faker->numberBetween(1,4);
 
             for ($i = 0; $i < $num_hotels; ++$i)
             {
@@ -33,6 +34,7 @@ class HotelsTableSeeder extends Seeder
                     'phone' => $faker->phoneNumber(),
                     'fax' => $faker->phoneNumber(),
                     'email' => $faker->companyEmail(),
+                    'rating' => ($faker->numberBetween($min = 0, $max = 50) / 10),
                     'longitude' => $faker->longitude(),
                     'latitude' => $faker->latitude(),
                 ]);

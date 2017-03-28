@@ -28,6 +28,7 @@ class CreateHotelsTable extends Migration
                 ->nullable();
             $table->string('email')
                 ->nullable();
+            $table->decimal('rating');
             $table->decimal('longitude', 10, 7);
             $table->decimal('latitude', 10, 7);
             $table->timestamps();

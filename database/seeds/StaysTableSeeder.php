@@ -33,7 +33,7 @@ class StaysTableSeeder extends Seeder
                 foreach($beds as $bed)
                 {
                     $start = $faker->dateTimeThisDecade();
-                    $end = &$start;
+                    $end = clone $start;
                     $end->add(new DateInterval('P'.$faker->randomDigit(1,7).'D'));
                     Stay::create([
                         'hotel_id' => $hotel->id,

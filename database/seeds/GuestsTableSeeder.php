@@ -10,7 +10,7 @@ class GuestsTableSeeder extends Seeder {
     {
         $faker = Faker\Factory::create();
 
-        foreach (range(1,20) as $index) 
+        foreach (range(5,20) as $index) 
         { 
             Guest::create([
                 'first_name' => $faker->firstName(),
