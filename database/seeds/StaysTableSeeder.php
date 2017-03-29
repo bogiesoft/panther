@@ -35,12 +35,13 @@ class StaysTableSeeder extends Seeder
                     $start = $faker->dateTimeThisDecade();
                     $end = clone $start;
                     $end->add(new DateInterval('P'.$faker->randomDigit(1,7).'D'));
+
                     Stay::create([
                         'hotel_id' => $hotel->id,
                         'bed_id' =>  is_null($is_room_booked) ? null : $bed->id,
-                        'start' => $start,
-                        'end' => $end,
-                        'checkin' => is_null( $is_checked_in) ? $start : null,
+                        'start' => date_format($start , 'Y-m-d H:i:s'),
+                        'end' => date_format($end , 'Y-m-d H:i:s'),
+                        'checkin' => is_null($is_checked_in) ? $start : null,
                         'checkout' => (is_null($is_checked_in) && is_null($is_checked_out)) ? $end : null
                     ]);
                 }

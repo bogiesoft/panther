@@ -9,6 +9,7 @@ class DatabaseSeeder extends Seeder
      */
     private $tables = [
         'users',
+        'hotel_types',
         'hotels',
         'room_room_amenity',
         'room_amenities',
@@ -22,7 +23,9 @@ class DatabaseSeeder extends Seeder
         'guest_stay',
         'employees',
         'purchases',
-        'purchase_products'
+        'purchase_products',
+        'facilities',
+        'facility_hotel'
     ];
 
     /**
@@ -35,6 +38,7 @@ class DatabaseSeeder extends Seeder
         $this->cleanDatabase();
 
         $this->call(UsersTableSeeder::class);
+        $this->call(HotelTypesTableSeeder::class);
         $this->call(HotelsTableSeeder::class);
         $this->call(ProductsTableSeeder::class);
         $this->call(GuestsTableSeeder::class);
@@ -50,6 +54,8 @@ class DatabaseSeeder extends Seeder
         $this->call(GuestStayTableSeeder::class);
         $this->call(PurchasesTableSeeder::class);
         $this->call(PurchaseProductsTableSeeder::class);
+        $this->call(FacilitiesTableSeeder::class);
+        $this->call(FacilityHotelTableSeeder::class);
     }
 
     /**

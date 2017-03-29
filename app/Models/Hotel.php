@@ -57,8 +57,13 @@ class Hotel extends Model
         return $this->hasManyThrough('App\Models\Bed', 'App\Models\Room');
     }
 
-    public function room_amenities()
+    public function facilities()
     {
-        return $this->hasMany('App\Models\RoomAmenity');
+        return $this->belongsToMany('App\Models\Facility');
+    }
+
+    public function type()
+    {
+        return $this->belongsTo("App\Models\HotelType");
     }
 }

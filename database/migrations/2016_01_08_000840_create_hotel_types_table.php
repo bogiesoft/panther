@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRoomAmenitiesTable extends Migration
+class CreateHotelTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +13,10 @@ class CreateRoomAmenitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('room_amenities', function (Blueprint $table) {
+        Schema::create('hotel_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('type');
+            
             $table->timestamps();
         });
     }
@@ -26,6 +28,7 @@ class CreateRoomAmenitiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('room_amenities');
+        //
+        Schema::dropIfExists('hotel_types');
     }
 }

@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stay extends Model
 {
-    protected $fillable = ['checkin', 'checkout'];
+    protected $fillable = ['start', 'end', 'checkin', 'checkout'];
 
     public function bed()
     {

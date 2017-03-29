@@ -23,7 +23,10 @@ class HotelsController extends ApiController
     public function index()
     {
         
-        $hotels = $this->getAuthenticatedUser()->hotels;
+        $hotels = Hotel::where('user_id', $this->getAuthenticatedUser()->id)
+            ->with("facilities")
+            ->with("type")
+            ->get();
 
         return $this->respond($this->hotelTransformer->transformCollection($hotels->all()));
     }

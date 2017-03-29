@@ -1,11 +1,10 @@
 <?php
 
-use App\Models\RoomAmenity;
-use App\Models\Hotel;
 use Illuminate\Database\Seeder;
 
+use App\Models\Facility;
 
-class RoomAmenitiesTableSeeder extends Seeder
+class FacilitiesTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,10 +14,10 @@ class RoomAmenitiesTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker\Factory::create();
-
-        foreach (range(3, 15) as $index)
+        
+        foreach (range(1, 20) as $index)
         {
-            RoomAmenity::create([
+            Facility::create([
                 'name' => $faker->word()
             ]);
         }

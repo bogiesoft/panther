@@ -18,6 +18,9 @@ class CreateHotelsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')
                 ->unsigned();
+            $table->integer('type_id')
+                ->unsigned();
+
             $table->string('name');
             $table->string('country');
             $table->string('city');
@@ -36,6 +39,9 @@ class CreateHotelsTable extends Migration
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
+            $table->foreign('type_id')
+                ->references('id')
+                ->on('hotel_types');
         });
     }
 

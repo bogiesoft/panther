@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRoomAmenitiesTable extends Migration
+class CreateFacilitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +13,7 @@ class CreateRoomAmenitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('room_amenities', function (Blueprint $table) {
+        Schema::create('facilities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->timestamps();
@@ -26,6 +27,6 @@ class CreateRoomAmenitiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('room_amenities');
+        Schema::drop('facilities');
     }
 }

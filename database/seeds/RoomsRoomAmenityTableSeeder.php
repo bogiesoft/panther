@@ -26,15 +26,10 @@ class RoomsRoomAmenityTableSeeder extends Seeder
                 ->pluck('id')
                 ->all();
 
-            $roomAmenityIds = $hotel
-                ->room_amenities
-                ->pluck('id')
-                ->all();
+            $roomAmenityIds = RoomAmenity::pluck('id')->all();
 
             foreach ($roomIds as $roomId)
             {
-                //$roomAmenities = array_rand($roomAmenityIds, $faker->randomDigit(3,count($roomAmenityIds)-1));
-
                 for ($i = 0; $i < $faker->randomDigit(4,count($roomAmenityIds)); ++$i)
                 {
                     DB::table('room_room_amenity')->insert([

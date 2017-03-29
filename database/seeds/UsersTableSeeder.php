@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $num_users = 35;
+        $num_users = 0;
 
         $faker = Faker\Factory::create();
 

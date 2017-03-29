@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class RoomAmenity extends Model
 {
     protected $table = 'room_amenities';
-    protected $fillable = ['name, hotel_id'];
+    protected $fillable = ['name'];
 
     public function rooms()
     {
