@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Validator;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
@@ -11,16 +12,46 @@ class Hotel extends Model
 
     protected $fillable = [
         'name',
+        'email',
+        'type_id',
         'country',
         'city',
         'address',
         'postal',
         'phone',
         'fax',
-        'email',
         'longitude',
         'latitude',
     ];
+    
+    protected $rules = array(
+        'name'      => 'required|unique:hotels,name',
+        'email'     => 'required|email|unique:hotels,email',
+        'type_id'   => 'required|integer',
+        'country'   => 'required', 
+        'city'      => 'required',
+        'address'   => 'required',
+        'postal'    => 'required',
+        'longitude' => 'required',
+        'latitude'  => 'required',
+    );
+
+    public $errors;
+
+    public function isValid()
+    {
+        $validation = Validator::make($this->attributes, $this->rules);
+
+        if ($validation->passes())
+        {
+            return true;
+        }
+        else
+        {
+            $this->errors = $validation->messages(); 
+            return false;
+        }
+    }
 
     public function owner()
     {

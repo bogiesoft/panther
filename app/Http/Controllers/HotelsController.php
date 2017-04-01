@@ -3,15 +3,19 @@
 namespace App\Http\Controllers;
 
 use Request;
+use Illuminate\Support\Facades\Input;
+
 use App\Models\Hotel;
 use App\Transformers\HotelTransformer;
 
 class HotelsController extends ApiController
 {
     protected $hotelTransformer;
+    protected $hotel;
 
-    public function __construct(HotelTransformer $hotelTransformer)
+    public function __construct(Hotel $hotel, HotelTransformer $hotelTransformer)
     {
+        $this->hotel = $hotel;
         $this->hotelTransformer = $hotelTransformer;
     }
 
@@ -22,7 +26,6 @@ class HotelsController extends ApiController
      */
     public function index()
     {
-        
         $hotels = Hotel::where('user_id', $this->getAuthenticatedUser()->id)
             ->with("facilities")
             ->with("type")
@@ -56,20 +59,18 @@ class HotelsController extends ApiController
      */
     public function store(Request $request)
     {
-        if(!Input::has('name') or
-            !Input::has('country') or
-            !Input::has('city') or
-            !Input::has('address') or
-            !Input::has('postal') or
-            !Input::has('phone') or
-            !Input::has('email'))
+        $input = Input::all();
+
+        if(!$this->hotel->fill($input)->isValid())
         {
-            return $this->respondFailedValidation();
+            return $this->hotel->errors;
         }
-
-        $hotel = Hotel::create(Input::all());
-
-        return $this->respondWithCreated($this->hotelTransformer->transform($hotel));
+        else
+        {
+            $this->hotel->user_id = $this->getAuthenticatedUser()->id;
+            $this->hotel->save();
+            return $this->respondWithCreated($this->hotelTransformer->transform($this->hotel));
+        }
     }
 
     /**
