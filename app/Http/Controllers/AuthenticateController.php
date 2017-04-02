@@ -17,12 +17,6 @@ class AuthenticateController extends ApiController
         // the user from retrieving their token if they don't already have it
         $this->middleware('jwt.auth', ['except' => ['authenticate', 'register']]);
     }
-    
-    public function index()
-    {
-        $users = User::all();
-        return $users;
-    }    
 
     public function register(Request $request)
     {

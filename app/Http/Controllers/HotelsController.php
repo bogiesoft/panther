@@ -31,7 +31,9 @@ class HotelsController extends ApiController
             ->with("type")
             ->get();
 
-        return $this->respond($this->hotelTransformer->transformCollection($hotels->all()));
+        return $this->respond([
+            'data' => $this->hotelTransformer->transformCollection($hotels->all())
+        ]);
     }
 
     public function search($query)
@@ -40,17 +42,7 @@ class HotelsController extends ApiController
 
         return $this->respond($this->hotelTransformer->transformPaginatedCollection($hotels));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * Store a newly created resource in storage.
      *
@@ -69,7 +61,10 @@ class HotelsController extends ApiController
         {
             $this->hotel->user_id = $this->getAuthenticatedUser()->id;
             $this->hotel->save();
-            return $this->respondWithCreated($this->hotelTransformer->transform($this->hotel));
+
+            return $this->respondWithCreated([
+                'data' => $this->hotelTransformer->transform($this->hotel)
+            ]);
         }
     }
 
@@ -81,17 +76,19 @@ class HotelsController extends ApiController
      */
     public function show($id)
     {
-        $hotel = Request::user()
-            ->hotels
-            ->where('id', $id)
+        $this->hotel = Hotel::where('id', $id)
+            ->with("facilities")
+            ->with("type")
             ->first();
 
-        if(is_null($hotel))
+        if(is_null($this->hotel))
         {
             return $this->respondNotFound();
         }
 
-        return $this->respond($this->hotelTransformer->transform($hotel));
+        return $this->respond([
+            'data' => $this->hotelTransformer->transform($this->hotel)
+        ]);
     }
 
     /**
@@ -114,19 +111,22 @@ class HotelsController extends ApiController
      */
     public function update(Request $request, $id)
     {
-        $hotel = Request::user()
-            ->hotels
-            ->where('id', $id)
-            ->get();
+        $this->hotel = Hotel::where('id', $id)
+            ->with("facilities")
+            ->with("type")
+            ->first();
 
-        if(is_null($hotel))
+        if(is_null($this->hotel))
         {
-            return $this->respondUnauthorizedWithErrors("Hotel doesn't belong to user");
+            return $this->respondNotFound("Hotel not found");
         }
+        
+        $this->hotel->update(Input::all());
+        $this->hotel->save();
 
-        $hotel->update(Input::all());
-
-        return $this->respondWithCreated($this->hotelTransformer->transform($hotel));
+        return $this->respondWithCreated([
+            'data' => $this->hotelTransformer->transform($this->hotel)
+        ]);
     }
 
     /**
