@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGuestStayTable extends Migration
+class CreateUserStayTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,21 +12,20 @@ class CreateGuestStayTable extends Migration
      */
     public function up()
     {
-        Schema::create('guest_stay', function (Blueprint $table) {
+        Schema::create('user_stay', function (Blueprint $table) {
             $table->increments('id');
 
             $table->integer('stay_id')
                 ->unsigned();
-            $table->integer('guest_id')
+            $table->integer('user_id')
                 ->unsigned();
-
-            $table->foreign('guest_id')
-                ->references('id')
-                ->on('guests');
 
             $table->foreign('stay_id')
                 ->references('id')
                 ->on('stays');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users');
 
             $table->timestamps();
         });
@@ -39,6 +38,6 @@ class CreateGuestStayTable extends Migration
      */
     public function down()
     {
-        Schema::drop('guest_stay');
+        Schema::drop('user_stay');
     }
 }

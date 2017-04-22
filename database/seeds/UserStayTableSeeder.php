@@ -3,11 +3,11 @@
 
 use Illuminate\Database\Seeder;
 
-use App\Models\Guest;
+use App\User;
 use App\Models\Hotel;
 
 
-class GuestStayTableSeeder extends Seeder
+class UserStayTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -18,7 +18,7 @@ class GuestStayTableSeeder extends Seeder
     {
         $faker = Faker\Factory::create();
 
-        $guestIds = Guest::pluck('id')->all();
+        $userIds = User::pluck('id')->all();
 
         $hotels = Hotel::all();
 
@@ -28,9 +28,9 @@ class GuestStayTableSeeder extends Seeder
 
             foreach ($stays as $stay)
             {
-                DB::table('guest_stay')->insert([
+                DB::table('user_stay')->insert([
                     'stay_id' => $stay->id,
-                    'guest_id' => $faker->randomElement($guestIds)
+                    'user_id' => $faker->randomElement($userIds)
                 ]);
             }
         }

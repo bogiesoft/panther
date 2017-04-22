@@ -30,7 +30,7 @@ class PurchasesTableSeeder extends Seeder
                 for ($i = 0; $i < $numPurchases; $i++)
                 {
                     Purchase::create([
-                        'guest_id' => $guest->id,
+                        'user_id' => $guest->id,
                         'stay_id' => $stay->id,
                         'purchased' => $faker->numberBetween(0,1) == 1 ? $faker->dateTime() : null,
                     ]);

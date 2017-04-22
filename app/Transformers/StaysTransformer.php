@@ -10,17 +10,17 @@ namespace App\Transformers;
 
 class StaysTransformer extends Transformer {
 
-    protected $guestTransformer;
+    protected $userTransformer;
     protected $roomTransformer;
     protected $bedTransformer;
 
     public function __construct(
-        GuestTransformer $guestTransformer,
+        UserTransformer $userTransformer,
         RoomTransformer $roomTransformer,
         BedTransformer $bedTransformer
         )
     {
-        $this->guestTransformer = $guestTransformer;
+        $this->userTransformer = $userTransformer;
         $this->roomTransformer = $roomTransformer;
         $this->bedTransformer = $bedTransformer;
     }
@@ -32,7 +32,7 @@ class StaysTransformer extends Transformer {
             'end' => $stay['end'],
             'checkin' => $stay['checkin'],
             'checkout' => $stay['checkout'],
-            'guests' => $this->guestTransformer->transformCollection($stay['guests']->all()),
+            'guests' => $this->userTransformer->transformCollection($stay['guests']->all()),
             'rooms' => $this->roomTransformer->transformCollection($stay['rooms']->all()),
             'bed' => $this->bedTransformer->transform($stay['bed'])
         ];

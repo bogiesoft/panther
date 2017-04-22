@@ -27,7 +27,7 @@ class EmployeesController extends ApiController
     public function index()
     {
         $employees = Hotel::find($this->hotel_id())
-            ->employees;
+            ->employees();
 
         if(is_null($employees))
         {
@@ -38,17 +38,7 @@ class EmployeesController extends ApiController
             'data' => $this->employeeTransformer->transformCollection($employees->all())
         ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
+    
     /**
      * Store a newly created resource in storage
      *

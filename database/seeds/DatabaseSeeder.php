@@ -9,8 +9,10 @@ class DatabaseSeeder extends Seeder
      */
     private $tables = [
         'users',
+        'companies',
         'hotel_types',
         'hotels',
+        'company_employee',
         'room_room_amenity',
         'room_amenities',
         'room_types',
@@ -20,8 +22,7 @@ class DatabaseSeeder extends Seeder
         'products',
         'stays',
         'room_stay',
-        'guest_stay',
-        'employees',
+        'user_stay',
         'purchases',
         'purchase_products',
         'facilities',
@@ -38,20 +39,20 @@ class DatabaseSeeder extends Seeder
         $this->cleanDatabase();
 
         $this->call(UsersTableSeeder::class);
+        $this->call(CompaniesTableSeeder::class);
         $this->call(HotelTypesTableSeeder::class);
         $this->call(HotelsTableSeeder::class);
+        $this->call(CompanyEmployeeTableSeeder::class);
         $this->call(ProductsTableSeeder::class);
-        $this->call(GuestsTableSeeder::class);
         $this->call(RoomTypesTableSeeder::class);
         $this->call(BedTypesTableSeeder::class);
         $this->call(RoomsTableSeeder::class);
         $this->call(BedsTableSeeder::class);
         $this->call(RoomAmenitiesTableSeeder::class);
         $this->call(RoomsRoomAmenityTableSeeder::class);
-        $this->call(EmployeesTableSeeder::class);
         $this->call(StaysTableSeeder::class);
         $this->call(RoomStayTableSeeder::class);
-        $this->call(GuestStayTableSeeder::class);
+        $this->call(UserStayTableSeeder::class);
         $this->call(PurchasesTableSeeder::class);
         $this->call(PurchaseProductsTableSeeder::class);
         $this->call(FacilitiesTableSeeder::class);

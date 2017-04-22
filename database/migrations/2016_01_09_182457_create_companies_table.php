@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEmployeesTable extends Migration
+class CreateCompaniesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,27 +13,27 @@ class CreateEmployeesTable extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::create('companies', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('hotel_id')
+            $table->integer('user_id')
                 ->unsigned();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->date('birth_date');
-            $table->string('email')
-                ->unique();
-            $table->string('phone');
+            $table->string('name');
             $table->string('country');
             $table->string('city');
             $table->string('address');
             $table->string('postal');
-            $table->string('password', 10);
-            $table->boolean('active');
+            $table->string('phone');
+            $table->string('fax')
+                ->nullable();
+            $table->string('email')
+                ->nullable();
+            
+            $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('hotel_id')
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('hotels');
+                ->on('users');
         });
     }
 
@@ -43,6 +44,6 @@ class CreateEmployeesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('employees');
+        Schema::dropIfExists('companies');
     }
 }

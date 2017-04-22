@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePurchasesTable extends Migration
+class CreateCompanyEmployeeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,23 +13,26 @@ class CreatePurchasesTable extends Migration
      */
     public function up()
     {
-        Schema::create('purchases', function (Blueprint $table) {
+        Schema::create('company_employee', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('company_id')
+                ->unsigned();
             $table->integer('user_id')
                 ->unsigned();
-            $table->integer('stay_id')
-                ->unsigned();
-            $table->timestamp('purchased')
+            $table->integer('hotel_id')
+                ->unsigned()
                 ->nullable();
             $table->timestamps();
 
+            $table->foreign('company_id')
+                ->references('id')
+                ->on('companies');
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users');
-
-            $table->foreign('stay_id')
+            $table->foreign('hotel_id')
                 ->references('id')
-                ->on('stays');
+                ->on('hotels');
         });
     }
 
@@ -39,6 +43,6 @@ class CreatePurchasesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('purchases');
+        Schema::dropIfExists('company_employee');
     }
 }

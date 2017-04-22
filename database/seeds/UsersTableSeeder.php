@@ -21,15 +21,17 @@ class UsersTableSeeder extends Seeder
             'first_name' => 'Philip',
             'last_name' => 'Blaquiere',
             'email' => 'philipblaquiere@gmail.com',
-            'password' => Hash::make('philip1234')
+            'password' => Hash::make('philip1234'),
+            'verified' => true
         ]);
 
-        for ($i=0; $i < $num_users; $i++) { 
+        for ($i = 0; $i < $num_users; $i++) { 
             User::create([
                 'first_name' => $faker->firstName(),
                 'last_name' => $faker->lastName(),
                 'email' => $faker->email(),
-                'password' => Hash::make('philip1234')
+                'password' => Hash::make('philip1234'),
+                'verified' => true
             ]);
         }
     }

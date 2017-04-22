@@ -16,7 +16,7 @@ class CreateHotelsTable extends Migration
             $table->softDeletes();
 
             $table->increments('id');
-            $table->integer('user_id')
+            $table->integer('company_id')
                 ->unsigned();
             $table->integer('type_id')
                 ->unsigned();
@@ -37,9 +37,9 @@ class CreateHotelsTable extends Migration
             $table->decimal('latitude', 10, 7);
             $table->timestamps();
 
-            $table->foreign('user_id')
+            $table->foreign('company_id')
                 ->references('id')
-                ->on('users');
+                ->on('companies');
             $table->foreign('type_id')
                 ->references('id')
                 ->on('hotel_types');

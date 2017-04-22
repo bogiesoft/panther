@@ -21,7 +21,7 @@ class Stay extends Model
 
     public function guests()
     {
-        return $this->belongsToMany('App\Models\Guest');
+        return $this->belongsToMany('App\User', 'user_stay');
     }
 
     public function rooms()

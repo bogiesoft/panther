@@ -28,7 +28,6 @@ class CreateHotelTypesTable extends Migration
      */
     public function down()
     {
-        //
         Schema::dropIfExists('hotel_types');
     }
 }

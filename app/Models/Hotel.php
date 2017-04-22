@@ -60,7 +60,7 @@ class Hotel extends Model
 
     public function employees()
     {
-        return $this->hasMany('App\Models\Employee');
+        return $this->belongsToMany('App\User', 'employee_hotel');
     }
 
     public function rooms()
