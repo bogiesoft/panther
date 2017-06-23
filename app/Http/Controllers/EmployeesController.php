@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+
 use App\Models\Employee;
 use App\Models\Hotel;
 use App\Transformers\EmployeeTransformer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -26,8 +30,18 @@ class EmployeesController extends ApiController
      */
     public function index()
     {
-        $employees = Hotel::find($this->hotel_id())
-            ->employees();
+        $hotel_id = Input::get('hotel_id');
+
+        $employees = JWTAuth::parseToken()
+            ->authenticate()
+            ->company
+            ->employees;
+
+        if(!is_null($hotel_id))
+        {
+            $employees = $employees
+                ->where("pivot.hotel_id", $hotel_id);
+        }
 
         if(is_null($employees))
         {

@@ -23,6 +23,7 @@ class EmployeeTransformer extends Transformer
             'city' => $employee['city'],
             'address' => $employee['address'],
             'postal' => $employee['postal'],
+            'hotel_id' => $employee['pivot']['hotel_id'],
         ];
     }
 }

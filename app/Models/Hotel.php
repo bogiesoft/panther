@@ -53,14 +53,14 @@ class Hotel extends Model
         }
     }
 
-    public function owner()
+    public function company()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsTo('App\Models\Company');
     }
 
     public function employees()
     {
-        return $this->belongsToMany('App\User', 'employee_hotel');
+        return $this->belongsToMany('App\User', 'company_employee');
     }
 
     public function rooms()

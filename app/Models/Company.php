@@ -57,7 +57,7 @@ class Company extends Model
 
     public function employees()
     {
-        return $this->hasMany('App\User', 'company_employee');
+        return $this->belongsToMany('App\User', 'company_employee')->withPivot('hotel_id');
     }
 
     public function hotels()

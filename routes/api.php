@@ -33,7 +33,7 @@ Route::group(['prefix' => 'v1', 'middleware' => ['jwt.auth']], function()
     Route::put('hotels/{id}', 'HotelsController@update');
 });
 
-Route::group(['prefix' => 'v1', 'middleware' => ['jwt.auth', 'hasHotel']], function()
+Route::group(['prefix' => 'v1', 'middleware' => ['jwt.auth', 'hasCompany']], function()
 {
     // Admin
     Route::resource('employees', 'EmployeesController', ['except' => ['create', 'edit']]);
